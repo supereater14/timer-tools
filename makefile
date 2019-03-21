@@ -13,12 +13,18 @@ BINS=$(foreach I, $(BIN_NAMES), $(BIN_DIR)/$I)
 OBJS=$(foreach I, $(OBJ_NAMES), $(OBJ_DIR)/$I.o)
 
 
-.PHONY: clean all
+.PHONY: clean all install remove
 
 all: $(BINS) $(OBJS)
 
 clean:
 	rm -f $(BIN_DIR)/* $(OBJ_DIR)/*
+
+install: $(BINS)
+	cp $(BINS) /bin/
+
+remove:
+	rm $(foreach I, $(BIN_NAMES), /bin/$I)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) $(LFLAGS) -c -o $@ $<
