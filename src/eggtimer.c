@@ -176,9 +176,17 @@ int main(int argc, char **argv){
 
 				break;
 			case 'e':
+				if(timer_state.mode != TIMER_EXIT){
+					fputs("Error: Multiple modes specified\n", stderr);
+					return -1;
+				}
 				timer_state.mode = TIMER_EXEC;
 				break;
 			case 'b':
+				if(timer_state.mode != TIMER_EXIT){
+					fputs("Error: Multiple modes specified\n", stderr);
+					return -1;
+				}
 				timer_state.mode = TIMER_BELL;
 				break;
 			default:
